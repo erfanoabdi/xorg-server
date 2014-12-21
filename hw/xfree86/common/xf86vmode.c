@@ -532,6 +532,20 @@ ProcXF86VidModeAddModeLine(ClientPtr client)
     DEBUG_P("XF86VidModeAddModeline");
 
     ver = ClientMajorVersion(client);
+
+    if (ver < 2) {
+        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeAddModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86OldVidModeAddModeLineReq));
+    }
+    else {
+        REQUEST_AT_LEAST_SIZE(xXF86VidModeAddModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86VidModeAddModeLineReq));
+    }
+
     if (ver < 2) {
         /* convert from old format */
         stuff = &newstuff;
@@ -581,18 +595,6 @@ ProcXF86VidModeAddModeLine(ClientPtr client)
                (unsigned long) stuff->after_flags);
     }
 
-    if (ver < 2) {
-        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeAddModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86OldVidModeAddModeLineReq));
-    }
-    else {
-        REQUEST_AT_LEAST_SIZE(xXF86VidModeAddModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86VidModeAddModeLineReq));
-    }
     if (len != stuff->privsize)
         return BadLength;
 
@@ -695,6 +697,20 @@ ProcXF86VidModeDeleteModeLine(ClientPtr client)
     DEBUG_P("XF86VidModeDeleteModeline");
 
     ver = ClientMajorVersion(client);
+
+    if (ver < 2) {
+        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeDeleteModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86OldVidModeDeleteModeLineReq));
+    }
+    else {
+        REQUEST_AT_LEAST_SIZE(xXF86VidModeDeleteModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86VidModeDeleteModeLineReq));
+    }
+
     if (ver < 2) {
         /* convert from old format */
         stuff = &newstuff;
@@ -725,18 +741,6 @@ ProcXF86VidModeDeleteModeLine(ClientPtr client)
              (unsigned long) stuff->flags);
     }
 
-    if (ver < 2) {
-        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeDeleteModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86OldVidModeDeleteModeLineReq));
-    }
-    else {
-        REQUEST_AT_LEAST_SIZE(xXF86VidModeDeleteModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86VidModeDeleteModeLineReq));
-    }
     if (len != stuff->privsize) {
         if (xf86GetVerbosity() > DEFAULT_XF86VIDMODE_VERBOSITY) {
             ErrorF("req_len = %ld, sizeof(Req) = %d, privsize = %ld, "
@@ -820,6 +824,20 @@ ProcXF86VidModeModModeLine(ClientPtr client)
     DEBUG_P("XF86VidModeModModeline");
 
     ver = ClientMajorVersion(client);
+
+    if (ver < 2) {
+        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeModModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86OldVidModeModModeLineReq));
+    }
+    else {
+        REQUEST_AT_LEAST_SIZE(xXF86VidModeModModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86VidModeModModeLineReq));
+    }
+
     if (ver < 2) {
         /* convert from old format */
         stuff = &newstuff;
@@ -846,18 +864,6 @@ ProcXF86VidModeModModeLine(ClientPtr client)
                stuff->vtotal, (unsigned long) stuff->flags);
     }
 
-    if (ver < 2) {
-        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeModModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86OldVidModeModModeLineReq));
-    }
-    else {
-        REQUEST_AT_LEAST_SIZE(xXF86VidModeModModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86VidModeModModeLineReq));
-    }
     if (len != stuff->privsize)
         return BadLength;
 
@@ -949,6 +955,19 @@ ProcXF86VidModeValidateModeLine(ClientPtr client)
     DEBUG_P("XF86VidModeValidateModeline");
 
     ver = ClientMajorVersion(client);
+
+    if (ver < 2) {
+        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeValidateModeLineReq);
+        len = client->req_len -
+            bytes_to_int32(sizeof(xXF86OldVidModeValidateModeLineReq));
+    }
+    else {
+        REQUEST_AT_LEAST_SIZE(xXF86VidModeValidateModeLineReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86VidModeValidateModeLineReq));
+    }
+
     if (ver < 2) {
         /* convert from old format */
         stuff = &newstuff;
@@ -979,17 +998,6 @@ ProcXF86VidModeValidateModeLine(ClientPtr client)
              (unsigned long) stuff->flags);
     }
 
-    if (ver < 2) {
-        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeValidateModeLineReq);
-        len = client->req_len -
-            bytes_to_int32(sizeof(xXF86OldVidModeValidateModeLineReq));
-    }
-    else {
-        REQUEST_AT_LEAST_SIZE(xXF86VidModeValidateModeLineReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86VidModeValidateModeLineReq));
-    }
     if (len != stuff->privsize)
         return BadLength;
 
@@ -1087,6 +1095,20 @@ ProcXF86VidModeSwitchToMode(ClientPtr client)
     DEBUG_P("XF86VidModeSwitchToMode");
 
     ver = ClientMajorVersion(client);
+
+    if (ver < 2) {
+        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeSwitchToModeReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86OldVidModeSwitchToModeReq));
+    }
+    else {
+        REQUEST_AT_LEAST_SIZE(xXF86VidModeSwitchToModeReq);
+        len =
+            client->req_len -
+            bytes_to_int32(sizeof(xXF86VidModeSwitchToModeReq));
+    }
+
     if (ver < 2) {
         /* convert from old format */
         stuff = &newstuff;
@@ -1117,18 +1139,6 @@ ProcXF86VidModeSwitchToMode(ClientPtr client)
              (unsigned long) stuff->flags);
     }
 
-    if (ver < 2) {
-        REQUEST_AT_LEAST_SIZE(xXF86OldVidModeSwitchToModeReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86OldVidModeSwitchToModeReq));
-    }
-    else {
-        REQUEST_AT_LEAST_SIZE(xXF86VidModeSwitchToModeReq);
-        len =
-            client->req_len -
-            bytes_to_int32(sizeof(xXF86VidModeSwitchToModeReq));
-    }
     if (len != stuff->privsize)
         return BadLength;
 
@@ -1470,6 +1480,7 @@ ProcXF86VidModeSetGammaRamp(ClientPtr client)
     int length;
 
     REQUEST(xXF86VidModeSetGammaRampReq);
+    REQUEST_AT_LEAST_SIZE(xXF86VidModeSetGammaRampReq);
 
     if (stuff->screen >= screenInfo.numScreens)
         return BadValue;
