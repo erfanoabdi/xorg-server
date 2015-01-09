@@ -293,10 +293,11 @@ ProcPseudoramiXGetScreenSize(ClientPtr client)
 
     TRACE;
 
+    REQUEST_SIZE_MATCH(xPanoramiXGetScreenSizeReq);
+
     if (stuff->screen >= pseudoramiXNumScreens)
       return BadMatch;
 
-    REQUEST_SIZE_MATCH(xPanoramiXGetScreenSizeReq);
     rc = dixLookupWindow(&pWin, stuff->window, client, DixGetAttrAccess);
     if (rc != Success)
         return rc;
