@@ -218,7 +218,7 @@ dnl Checks for library functions.
 AC_CHECK_FUNCS([backtrace ffs geteuid getuid issetugid getresuid \
 	getdtablesize getifaddrs getpeereid getpeerucred getzoneid \
 	mmap seteuid shmctl64 strncasecmp vasprintf vsnprintf walkcontext])
-AC_REPLACE_FUNCS([strcasecmp strcasestr strlcat strlcpy strndup])
+AC_REPLACE_FUNCS([strcasecmp strcasestr strlcat strlcpy strndup timingsafe_memcmp])
 
 dnl Find the math libary, then check for cbrt function in it.
 AC_CHECK_LIB(m, sqrt)
