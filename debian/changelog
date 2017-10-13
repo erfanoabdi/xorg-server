@@ -21,6 +21,8 @@ xorg-server (2:1.16.4-1+deb8u2) UNRELEASED; urgency=high
   * Xi: fix wrong extra length check in ProcXIChangeHierarchy (CVE-2017-12178)
   * dbe: Unvalidated variable-length request in ProcDbeGetVisualInfo (CVE-2017-12177)
   * Unvalidated extra length in ProcEstablishConnection (CVE-2017-12176)
+  * Use timingsafe_memcmp() to compare MIT-MAGIC-COOKIES (CVE-2017-2624)
+  * Xwayland: enable access control and default to just the local user (CVE-2015-3164)
 
  -- Julien Cristau <jcristau@debian.org>  Fri, 13 Oct 2017 11:55:04 +0200
 
