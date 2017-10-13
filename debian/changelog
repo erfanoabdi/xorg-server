@@ -1,3 +1,29 @@
+xorg-server (2:1.16.4-1+deb8u2) UNRELEASED; urgency=high
+
+  * render: Fix out of boundary heap access
+  * Xext/shm: Validate shmseg resource id (CVE-2017-13721)
+  * xkb: Escape non-printable characters correctly.
+  * xkb: Handle xkb formated string output safely (CVE-2017-13723)
+  * os: Make sure big requests have sufficient length.
+  * Unvalidated lengths in
+    - XFree86-VidModeExtension (CVE-2017-12180)
+    - XFree86-DGA (CVE-2017-12181)
+    - XFree86-DRI (CVE-2017-12182)
+    - XFIXES (CVE-2017-12183)
+    - XINERAMA (CVE-2017-12184)
+    - MIT-SCREEN-SAVER (CVE-2017-12185)
+    - X-Resource (CVE-2017-12186)
+    - RENDER (CVE-2017-12187)
+  * Xi: Test exact size of XIBarrierReleasePointer
+  * Xi: integer overflow and unvalidated length in
+    (S)ProcXIBarrierReleasePointer (CVE-2017-12179)
+  * Xi: Silence some tautological warnings
+  * Xi: fix wrong extra length check in ProcXIChangeHierarchy (CVE-2017-12178)
+  * dbe: Unvalidated variable-length request in ProcDbeGetVisualInfo (CVE-2017-12177)
+  * Unvalidated extra length in ProcEstablishConnection (CVE-2017-12176)
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 13 Oct 2017 11:55:04 +0200
+
 xorg-server (2:1.16.4-1+deb8u1) jessie-security; urgency=medium
 
   * CVE-2017-10971 CVE-2017-10972
