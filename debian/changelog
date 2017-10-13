@@ -1,3 +1,9 @@
+xorg-server (2:1.16.4-1+deb8u1) jessie-security; urgency=medium
+
+  * CVE-2017-10971 CVE-2017-10972
+
+ -- Moritz Mühlenhoff <jmm@debian.org>  Thu, 06 Jul 2017 22:34:31 +0200
+
 xorg-server (2:1.16.4-1) unstable; urgency=high
 
   * New upstream release
