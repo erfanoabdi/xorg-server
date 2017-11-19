@@ -1,3 +1,26 @@
+xorg-server (2:1.12.4-6+deb7u8) UNRELEASED; urgency=medium
+
+  * Cherry-pick changes from the jessie branch:
+
+  * render: Fix out of boundary heap access
+  * xkb: Escape non-printable characters correctly.
+  * xkb: Handle xkb formated string output safely (CVE-2017-13723)
+  * os: Make sure big requests have sufficient length.
+  * Unvalidated lengths in
+    - XFree86-VidModeExtension (CVE-2017-12180)
+    - XFree86-DRI (CVE-2017-12182)
+    - XFIXES (CVE-2017-12183)
+    - XINERAMA (CVE-2017-12184)
+    - MIT-SCREEN-SAVER (CVE-2017-12185)
+    - RENDER (CVE-2017-12187)
+  * Xi: Silence some tautological warnings
+  * Xi: fix wrong extra length check in ProcXIChangeHierarchy (CVE-2017-12178)
+  * dbe: Unvalidated variable-length request in ProcDbeGetVisualInfo (CVE-2017-12177)
+  * Unvalidated extra length in ProcEstablishConnection (CVE-2017-12176)
+  * Use timingsafe_memcmp() to compare MIT-MAGIC-COOKIES (CVE-2017-2624)
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 19 Nov 2017 20:09:41 +0100
+
 xorg-server (2:1.12.4-6+deb7u7) wheezy-security; urgency=high
 
   * Non-maintainer upload by the Debian LTS Team.
