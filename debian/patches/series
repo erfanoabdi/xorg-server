@@ -1,5 +1,6 @@
 ## Patches with a number < 100 are applied in debian.
 ## Ubuntu patches start with 100.
+CVE-2017-10971.patch
 001_fedora_extramodes.patch
 02_Add-libnettle-as-option-for-sha1.diff
 03_fix-panning.diff
@@ -12,3 +13,9 @@
 09_EXA-Track-source-mask-pixmaps-more-explicitly-for-Co.diff
 14_CVE-2013-4396.diff
 15_CVE-2013-6424.diff
+16_CVE-2014-mult.diff
+17_CVE-regressions.diff
+dix-Allow-zero-height-PutImage-requests.diff
+xkb-Dont-swap-XkbSetGeometry-data-in-the-input-buffer.diff
+xkb-Check-strings-length-against-request-size.diff
+CVE-2017-10972.patch

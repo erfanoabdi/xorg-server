@@ -1,3 +1,41 @@
+xorg-server (2:1.12.4-6+deb7u7) wheezy-security; urgency=high
+
+  * Non-maintainer upload by the Debian LTS Team.
+  * CVE-2017-10971: fix stack overflow in the endianness conversion of X Events
+  * CVE-2017-10972: fix uninitialized data in endianness conversion in the
+    XEvent handling
+
+ -- Lucas Kanashiro <kanashiro@debian.org>  Thu, 13 Jul 2017 15:19:46 -0300
+
+xorg-server (2:1.12.4-6+deb7u6) wheezy-security; urgency=high
+
+  * dix: Allow zero-height PutImage requests (regression in previous update)
+  * xkb: Don't swap XkbSetGeometry data in the input buffer (prerequisite for
+    next patch)
+  * xkb: Check strings length against request size (CVE-2015-0255)
+
+ -- Julien Cristau <jcristau@debian.org>  Mon, 09 Feb 2015 10:41:25 +0100
+
+xorg-server (2:1.12.4-6+deb7u5) wheezy-security; urgency=low
+
+  * Two followup patches by Keith Packard
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Tue, 09 Dec 2014 21:09:51 +0000
+
+xorg-server (2:1.12.4-6+deb7u4) wheezy-security; urgency=high
+
+  * Non-maintainer upload by the Security Team.
+  * Fix encoding of debian/changelog to UTF-8. 
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 09 Dec 2014 09:52:20 +0100
+
+xorg-server (2:1.12.4-6+deb7u3) wheezy-security; urgency=low
+
+  * Multiple new security issues, backports by Julien and myself
+    (CVE-2014-8091 to CVE-2014-8102)
+
+ -- Moritz Mühlenhoff <jmm@debian.org>  Tue, 09 Dec 2014 04:41:14 +0100
+
 xorg-server (2:1.12.4-6+deb7u2) wheezy-security; urgency=high
 
   * exa: only draw valid trapezoids
