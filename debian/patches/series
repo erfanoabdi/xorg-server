@@ -19,3 +19,6 @@ dix-Allow-zero-height-PutImage-requests.diff
 xkb-Dont-swap-XkbSetGeometry-data-in-the-input-buffer.diff
 xkb-Check-strings-length-against-request-size.diff
 CVE-2017-10972.patch
+0001-Xi-Silence-some-tautological-warnings.patch
+0002-Xi-fix-wrong-extra-length-check-in-ProcXIChangeHiera.patch
+0003-dbe-Unvalidated-variable-length-request-in-ProcDbeGe.patch

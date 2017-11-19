@@ -1,0 +1,49 @@
+From 7a7b8c97240112c0b7b279018908410d854b6ccc Mon Sep 17 00:00:00 2001
+From: Jeremy Huddleston Sequoia <jeremyhu@apple.com>
+Date: Thu, 15 Oct 2015 22:28:49 -0700
+Subject: [PATCH 1/2] Xi: Silence some tautological warnings
+
+xichangehierarchy.c:424:23: warning: comparison of constant 536870911 with expression of type 'uint16_t'
+      (aka 'unsigned short') is always false [-Wtautological-constant-out-of-range-compare,Semantic Issue]
+    if (stuff->length > (INT_MAX >> 2))
+        ~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~
+xichangehierarchy.c:438:26: warning: comparison of constant 536870911 with expression of type 'uint16_t'
+      (aka 'unsigned short') is always false [-Wtautological-constant-out-of-range-compare,Semantic Issue]
+        if ((any->length > (INT_MAX >> 2)) || (len < (any->length << 2)))
+             ~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~
+
+Signed-off-by: Jeremy Huddleston Sequoia <jeremyhu@apple.com>
+Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+(cherry picked from commit ee06f674bbcd796324d6daf69bfb5d8856e94008)
+---
+ Xi/xichangehierarchy.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/Xi/xichangehierarchy.c b/Xi/xichangehierarchy.c
+index 27324452d..8d5b577b6 100644
+--- a/Xi/xichangehierarchy.c
++++ b/Xi/xichangehierarchy.c
+@@ -421,9 +421,7 @@ ProcXIChangeHierarchy(ClientPtr client)
+     if (!stuff->num_changes)
+         return rc;
+ 
+-    if (stuff->length > (INT_MAX >> 2))
+-        return BadAlloc;
+-    len = (stuff->length << 2) - sizeof(xXIAnyHierarchyChangeInfo);
++    len = ((size_t)stuff->length << 2) - sizeof(xXIAnyHierarchyChangeInfo);
+ 
+     any = (xXIAnyHierarchyChangeInfo *) &stuff[1];
+     while (stuff->num_changes--) {
+@@ -435,7 +433,7 @@ ProcXIChangeHierarchy(ClientPtr client)
+         SWAPIF(swaps(&any->type));
+         SWAPIF(swaps(&any->length));
+ 
+-        if ((any->length > (INT_MAX >> 2)) || (len < (any->length << 2)))
++        if (len < ((size_t)any->length << 2))
+             return BadLength;
+ 
+ #define CHANGE_SIZE_MATCH(type) \
+-- 
+2.15.0
+
