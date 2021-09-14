@@ -598,11 +598,6 @@ glamor_init(ScreenPtr screen, unsigned int flags)
             ErrorF("GL_EXT_texture_format_BGRA8888 required\n");
             goto fail;
         }
-
-        if (!epoxy_has_gl_extension("GL_OES_texture_border_clamp")) {
-            ErrorF("GL_OES_texture_border_clamp required\n");
-            goto fail;
-        }
     }
 
     if (!epoxy_has_gl_extension("GL_ARB_vertex_array_object") &&
