@@ -346,11 +346,6 @@ xwl_glamor_hybris_init_egl(struct xwl_screen *xwl_screen)
         goto error;
     }
 
-    if (!epoxy_has_gl_extension("GL_OES_EGL_image")) {
-        ErrorF("GL_OES_EGL_image not available\n");
-        goto error;
-    }
-
     if (!eglMakeCurrent(xwl_screen->egl_display,
                         EGL_NO_SURFACE, EGL_NO_SURFACE, xwl_screen->egl_context)) {
         goto error;
