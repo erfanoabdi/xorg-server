@@ -73,6 +73,15 @@ xwl_glamor_init_wl_registry(struct xwl_screen *xwl_screen,
                             uint32_t id, const char *interface,
                             uint32_t version)
 {
+    if (xwl_screen->glamor_hybris_backend.is_available &&
+	xwl_screen->glamor_hybris_backend.init_wl_registry(xwl_screen,
+                                                 registry,
+                                                 id,
+                                                 interface,
+                                                 version)) {
+        return;
+    }
+
     if (xwl_screen->gbm_backend.is_available &&
         xwl_screen->gbm_backend.init_wl_registry(xwl_screen,
                                                  registry,
@@ -168,7 +177,7 @@ glamor_egl_fd_name_from_pixmap(ScreenPtr screen,
 void
 xwl_glamor_init_backends(struct xwl_screen *xwl_screen, Bool use_eglstream)
 {
-#ifdef GLAMOR_HAS_GBM
+#if 0
     xwl_glamor_init_gbm(xwl_screen);
     if (!xwl_screen->gbm_backend.is_available && !use_eglstream)
         ErrorF("xwayland glamor: GBM backend (default) is not available\n");
@@ -178,12 +187,13 @@ xwl_glamor_init_backends(struct xwl_screen *xwl_screen, Bool use_eglstream)
     if (!xwl_screen->eglstream_backend.is_available && use_eglstream)
         ErrorF("xwayland glamor: EGLStream backend requested but not available\n");
 #endif
+    xwl_glamor_init_hybris(xwl_screen);
 }
 
 static Bool
 xwl_glamor_select_gbm_backend(struct xwl_screen *xwl_screen)
 {
-#ifdef GLAMOR_HAS_GBM
+#if 0
     if (xwl_screen->gbm_backend.is_available &&
         xwl_glamor_has_wl_interfaces(xwl_screen, &xwl_screen->gbm_backend)) {
         xwl_screen->egl_backend = &xwl_screen->gbm_backend;
@@ -214,9 +224,26 @@ xwl_glamor_select_eglstream_backend(struct xwl_screen *xwl_screen)
     return FALSE;
 }
 
+static Bool
+xwl_glamor_select_glamor_hybris_backend(struct xwl_screen *xwl_screen)
+{
+    if (xwl_screen->glamor_hybris_backend.is_available) {
+        xwl_screen->egl_backend = &xwl_screen->glamor_hybris_backend;
+        return TRUE;
+    }
+    
+    ErrorF("Missing Wayland requirements for glamor hybris backend\n");
+    return FALSE;
+}
+
 void
 xwl_glamor_select_backend(struct xwl_screen *xwl_screen, Bool use_eglstream)
 {
+    if (true) {
+        xwl_glamor_select_glamor_hybris_backend(xwl_screen);
+        return;
+    } 
+
     if (use_eglstream) {
         if (!xwl_glamor_select_eglstream_backend(xwl_screen))
             xwl_glamor_select_gbm_backend(xwl_screen);

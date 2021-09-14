@@ -28,14 +28,14 @@ Xwayland_LDADD =				\
 	$(XWAYLAND_SYS_LIBS)			\
 	$(top_builddir)/Xext/libXvidmode.la	\
 	$(XSERVER_SYS_LIBS)
-Xwayland_LDFLAGS = $(LD_EXPORT_SYMBOLS_FLAG)
+Xwayland_LDFLAGS = $(LD_EXPORT_SYMBOLS_FLAG)    \
+		   -shared -export-dynamic
 
 Xwayland_built_sources =
 
 if GLAMOR_EGL
 Xwayland_SOURCES += 				\
 	xwayland-glamor.c			\
-	xwayland-glamor-gbm.c			\
 	xwayland-present.c
 if XV
 Xwayland_SOURCES += 				\
@@ -46,16 +46,21 @@ if XWAYLAND_EGLSTREAM
 Xwayland_SOURCES +=				\
 	xwayland-glamor-eglstream.c
 endif
+Xwayland_SOURCES +=				\
+	xwayland-glamor-hybris.c
 
 glamor_built_sources =				\
 	drm-client-protocol.h			\
 	drm-protocol.c
 
+hybris_built_sources = wayland-android-protocol.c \
+                wayland-android-client-protocol.h
+
 Xwayland_built_sources += $(glamor_built_sources)
+Xwayland_built_sources += $(hybris_built_sources)
 
 glamor_lib = $(top_builddir)/glamor/libglamor.la
-
-Xwayland_LDADD += $(GLAMOR_LIBS) $(GBM_LIBS) -lEGL -lGL
+Xwayland_LDADD += $(GLAMOR_LIBS) $(GBM_LIBS) -L/usr/lib/xorg/modules/ -ldrihybris -lhybris-eglplatformcommon -lEGL -lGL
 Xwayland_DEPENDENCIES = $(glamor_lib) $(XWAYLAND_LIBS)
 endif
 
