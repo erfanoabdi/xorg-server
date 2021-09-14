@@ -272,7 +272,7 @@ glamor_block_handler(ScreenPtr screen)
     glamor_screen_private *glamor_priv = glamor_get_screen_private(screen);
 
     glamor_make_current(glamor_priv);
-    glFlush();
+    glamor_finish(screen);
 }
 
 static void
@@ -280,8 +280,7 @@ _glamor_block_handler(ScreenPtr screen, void *timeout)
 {
     glamor_screen_private *glamor_priv = glamor_get_screen_private(screen);
 
-    glamor_make_current(glamor_priv);
-    glFlush();
+    glamor_block_handler(screen);
 
     screen->BlockHandler = glamor_priv->saved_procs.block_handler;
     screen->BlockHandler(screen, timeout);
@@ -864,15 +863,10 @@ _glamor_fds_from_pixmap(ScreenPtr screen, PixmapPtr pixmap, int *fds,
             return 0;
 
         if (modifier) {
-            return glamor_egl_fds_from_pixmap(screen, pixmap, fds,
-                                              strides, offsets,
-                                              modifier);
+            return 0;
         } else {
             CARD16 stride;
-
-            fds[0] = glamor_egl_fd_from_pixmap(screen, pixmap, &stride, size);
             strides[0] = stride;
-
             return fds[0] >= 0;
         }
     default:
